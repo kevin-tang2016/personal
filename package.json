@@ -1,0 +1,22 @@
+{
+  "name": "homepage",
+  "version": "0.1.0",
+  "description": "个人主页",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevin-tang2016/homepage.git"
+  },
+  "keywords": [
+    "个人主页"
+  ],
+  "author": "kevin-tang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevin-tang2016/homepage/issues"
+  },
+  "homepage": "https://github.com/kevin-tang2016/homepage#readme"
+}
