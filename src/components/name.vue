@@ -18,7 +18,7 @@ export default {
     },
     methods : {
         changeParent(){
-            this.$emit("changed")
+            this.$emit("changed");
         }
     }
 }
