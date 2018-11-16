@@ -2,8 +2,9 @@
     <div class="hello-world">
         <input type="text" v-model="inputVal">
         <h1>{{reversedMsg }}</h1>
-        <button>点击</button>
-        <h5 v-for="(item,index) in arr"  :key="index" @click="clickEvent(index)">{{item}}<br/></h5>
+        <h1>vuex:{{name }}</h1>
+        <button @click="changeName">点击改变vuex 状态</button>
+        <h5 v-for="(item,index) in arr"  :key="index" @click="clickEvent(index)">{{item | changeText | toUpper }}<br/></h5>
         <Name :name="msg" @changed="changed">
             <template slot="first">
                 <div>需要放到子组件的内容slot--click name1</div>
@@ -15,11 +16,13 @@
             <custom-input v-model="searchText" ref="customInput" />
         </Name>
         <base-checkbox v-model="checked" />
+
     </div>
 </template>
 
 <script>
     import _ from 'lodash'
+    import  { mapState,mapActions }  from 'vuex'
     import  Name  from "./name"
     import  CustomInput  from "./custom-input"
     import  BaseCheckbox  from "./base-checkbox"
@@ -37,7 +40,17 @@ export default {
             arr:["test1","test2","test3"],
             searchText:"子组件自动聚焦",
             checked:true,
-             lastIndex:""
+            lastIndex:""
+        }
+    },
+    filters:{
+        changeText(value){
+            if(!value) return ""
+            value = value.toString()
+            return _.capitalize(value)
+        },
+        toUpper(value){
+            return _.toUpper(value)
         }
     },
     mounted(){
@@ -55,21 +68,22 @@ export default {
         },
         changed(){
             this.msg ="tang by changed"
-        }
+        },
+        ...mapActions(["changeName"])
+
     },
     watch:{
-        inputVal(newVal,oldVal){
-            console.log(`newVal-${newVal},oldVal-${oldVal}`)
-        },
-        checked(newVal,oldVal){
-            console.log(`newVal-${newVal},oldVal-${oldVal}`)
-        }
+
     },
     computed:{
+        ...mapState([
+                "name"
+        ]),
         reversedMsg(){
             return this.msg.split('').reverse().join('')
         }
     }
+
 }
 </script>
 
